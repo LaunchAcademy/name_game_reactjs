@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import PresidentList from './PresidentList';
+import PhotoCard from './PhotoCard';
+let _ = require('underscore');
 
 export class App extends Component {
-  render(){
+  constructor(props) {
+    super(props);
+    this.state = { people: PresidentList.items() };
+  };
+
+  render() {
+    var person = _.sample(this.state.people);
     return (
-      <h1>Hello World</h1>
+      <PhotoCard correctPerson={person} />
     );
   }
 }
