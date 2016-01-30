@@ -6,13 +6,27 @@ let _ = require('underscore');
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { people: PresidentList.items() };
+  };
+
+  componentDidMount() {
+    this.setState({
+      people: PresidentList.items()
+    });
   };
 
   render() {
-    var person = _.sample(this.state.people);
-    return (
-      <PhotoCard correctPerson={person} />
-    );
-  }
+    let person;
+    let otherPeople;
+    if(this.state && this.state.people){
+      person = _.sample(this.state.people);
+      otherPeople = _.sample(this.state.people, 3);
+      return (
+        <PhotoCard correctPerson={person} otherPeople={ otherPeople } />
+      );
+    }
+    else {
+      return (<h1>Not found</h1>);
+    }
+
+  };
 }
